@@ -12,19 +12,31 @@ foreach ($finder->in("Krastorio2/locale")->files()->contains('[color=173, 19, 17
     /**
      * @var SplFileInfo $file
      */
-    $contents = "[item-name]\n";
 
     $lines = explode(PHP_EOL, $file->getContents());
+    $section = "";
 
-    foreach ($lines as $line){
-        if(strpos($line, "[color=173, 19, 173]") !== false){
-            if(strpos($line, "imersite=") !== false) continue; // skip imersite :o
-            $contents .= preg_replace('/ \[color=173, 19, 173\](.*)\[\/color\]/', '', $line) . PHP_EOL;
+    foreach ($lines as &$line){
+
+        // keep sections
+        if(strpos($line, "[") === 0){
+            $section = trim($line);
+            continue;
         }
+
+        // remove unmodified lines
+        if(strpos($line, "[color=173, 19, 173]") === false || $section != "[item-name]"){
+            $line = null;
+            continue;
+        }
+
+        // modify pink lines
+        $line = preg_replace('/ \[color=173, 19, 173\](.*)\[\/color\]/', '', $line);
+        dump($line);
     }
 
     if(!is_dir($path = './Krastorio2_Patreoff_1.0.0/locale/' . $file->getRelativePath())) mkdir($path, 0777, true);
 
-    file_put_contents('./Krastorio2_Patreoff_1.0.0/locale/' . $file->getRelativePathname(), $contents);
-    dump($file);
+    file_put_contents('./Krastorio2_Patreoff_1.0.0/locale/' . $file->getRelativePathname(), implode(PHP_EOL, array_filter($lines)));
+//    dump($file);
 }
