@@ -1,0 +1,13 @@
+{
+    "name": "quezler/factorio__mod--krastorio2-patreoff",
+    "authors": [
+        {
+            "name": "Patrick 'Quezler' Mounier",
+            "email": "patrick@queztech.net"
+        }
+    ],
+    "require": {
+        "symfony/finder": "^5.0",
+        "symfony/var-dumper": "^5.0"
+    }
+}
