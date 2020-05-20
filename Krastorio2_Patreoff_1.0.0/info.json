@@ -1,0 +1,9 @@
+{
+  "name": "Krastorio2_Patreoff",
+  "version": "1.0.0",
+  "factorio_version": "0.18",
+  "title": "Krastorio2 Patreoff",
+  "author": "Quezler",
+  "dependencies": ["base >= 0.18.0", "Krastorio2 >= 0.9.17"],
+  "description": "Removes the ugly pink patreon tag from items."
+}
